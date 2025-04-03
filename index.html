@@ -2,9 +2,14 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2048游戏</title>
     <style>
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            touch-action: none;  /* 禁用默认触摸行为 */
+        }
         body {
             display: flex;
             flex-direction: column;
@@ -18,10 +23,18 @@
         
         .container {
             width: 100%;
-            max-width: 500px;  /* 添加最大宽度限制 */
-            margin: 10px auto;
-            padding: 0 10px;
+            max-width: 100%;
+            margin: 0;
+            padding: 10px;
             box-sizing: border-box;
+            height: 100vh;  /* 使用视口高度 */
+        }
+        
+        .grid-container {
+            width: calc(100vw - 20px);  /* 根据视口宽度计算 */
+            aspect-ratio: 1/1;
+            max-width: 500px;  /* 在大屏幕上限制最大宽度 */
+            margin: 0 auto;
         }
         
         .header {
@@ -33,11 +46,25 @@
         }
         
         h1 {
-            font-size: 40px;  /* 减小标题大小 */
-            font-weight: bold;
-            margin: 0;
-            color: #776e65;
-            line-height: 1;
+            font-size: 30px;
+        }
+        
+        .score-container {
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+        
+        .score-container #score {
+            font-size: 16px;
+        }
+        
+        .new-game {
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+        
+        .tile {
+            font-size: 5vw;  /* 使用视口单位 */
         }
         
         .score-container {
@@ -567,16 +594,23 @@
             touchStartY = e.touches[0].clientY;
         });
 
+        // 在现有触摸事件处理前添加
+        document.addEventListener('touchmove', (e) => {
+            e.preventDefault();  // 阻止页面滚动
+        }, { passive: false });
+
+        // 修改现有触摸事件处理
         document.addEventListener('touchend', (e) => {
             const touchEndX = e.changedTouches[0].clientX;
             const touchEndY = e.changedTouches[0].clientY;
             const deltaX = touchEndX - touchStartX;
             const deltaY = touchEndY - touchStartY;
+            const threshold = 30;  // 滑动阈值
 
-            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) {
                 if (deltaX > 0) move('right');
                 else move('left');
-            } else {
+            } else if (Math.abs(deltaY) > threshold) {
                 if (deltaY > 0) move('down');
                 else move('up');
             }
