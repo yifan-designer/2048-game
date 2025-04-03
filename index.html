@@ -12,24 +12,28 @@
             background-color: #faf8ef;
             font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             color: #776e65;
         }
         
         .container {
-            width: 470px;
-            margin: 20px auto;
+            width: 100%;
+            max-width: 500px;  /* 添加最大宽度限制 */
+            margin: 10px auto;
+            padding: 0 10px;
+            box-sizing: border-box;
         }
         
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            width: 100%;
         }
         
         h1 {
-            font-size: 70px;
+            font-size: 40px;  /* 减小标题大小 */
             font-weight: bold;
             margin: 0;
             color: #776e65;
@@ -39,49 +43,45 @@
         .score-container {
             position: relative;
             background: #bbada0;
-            padding: 12px 25px;
+            padding: 8px 15px;  /* 减小内边距 */
             border-radius: 6px;
             color: white;
-            font-size: 18px;
+            font-size: 14px;  /* 减小字体大小 */
             font-weight: bold;
             text-align: center;
             box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-            min-width: 70px;
+            min-width: 60px;  /* 减小最小宽度 */
         }
         
         .score-container #score {
             display: block;
-            font-size: 28px;
-            margin-top: 5px;
+            font-size: 20px;  /* 减小分数字体大小 */
+            margin-top: 3px;
         }
         
         .new-game {
             background: #8f7a66;
             color: #f9f6f2;
             border: none;
-            padding: 12px 25px;
+            padding: 10px 15px;  /* 减小内边距 */
             border-radius: 6px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;  /* 减小字体大小 */
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             transition: background-color 0.2s ease;
             box-shadow: 0 4px 0 rgba(0,0,0,0.1);
             display: block;
-            width: 130px;
+            width: 110px;  /* 减小按钮宽度 */
             text-align: center;
-        }
-        
-        .new-game:hover {
-            background: #7f6a56;
         }
         
         .grid-container {
             background: #bbada0;
-            padding: 15px;
+            padding: 10px;  /* 减小内边距 */
             border-radius: 8px;
-            width: 470px;
-            height: 470px;
+            width: 100%;
+            aspect-ratio: 1/1;  /* 保持正方形 */
             position: relative;
             box-sizing: border-box;
             box-shadow: 0 5px 0 rgba(0,0,0,0.1);
@@ -89,8 +89,8 @@
         
         .grid-row {
             display: flex;
-            margin-bottom: 15px;
-            height: 100px;
+            margin-bottom: 10px;  /* 减小行间距 */
+            height: calc(25% - 7.5px);  /* 动态计算高度 */
         }
         
         .grid-row:last-child {
@@ -98,9 +98,9 @@
         }
         
         .grid-cell {
-            width: 100px;
-            height: 100px;
-            margin-right: 15px;
+            width: calc(25% - 7.5px);  /* 动态计算宽度 */
+            aspect-ratio: 1/1;  /* 保持正方形 */
+            margin-right: 10px;  /* 减小单元格间距 */
             background: rgba(238, 228, 218, 0.35);
             border-radius: 6px;
             position: relative;
@@ -114,17 +114,26 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 45px;
+            font-size: 24px;  /* 减小默认字体大小 */
             font-weight: bold;
             background: #eee4da;
             border-radius: 6px;
             transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: transform;
+        }
+
+        /* 调整不同数字块的字体大小 */
+        .tile.tile-128, .tile.tile-256, .tile.tile-512 {
+            font-size: 20px;
+        }
+        
+        .tile.tile-1024, .tile.tile-2048 {
+            font-size: 18px;
         }
         
         .tile.tile-new {
