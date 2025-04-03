@@ -8,116 +8,98 @@
         html, body {
             height: 100%;
             overflow: hidden;
-            touch-action: none;  /* 禁用默认触摸行为 */
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #faf8ef;
-            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            touch-action: none;
+            background-color: #f8f9fa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
             margin: 0;
-            padding: 10px;
-            color: #776e65;
+            padding: 0 24px;
+            color: #37352f;
+            display: contents; /* 使用contents布局 */
+            /* 移除justify-content和align-items，因为display: contents会使这些属性失效 */
         }
         
         .container {
             width: 100%;
-            max-width: 100%;
-            margin: 0;
-            padding: 10px;
+            max-width: 600px;
+            padding: 0;
             box-sizing: border-box;
-            height: 100vh;  /* 使用视口高度 */
-        }
-        
-        .grid-container {
-            width: calc(100vw - 20px);  /* 根据视口宽度计算 */
-            aspect-ratio: 1/1;
-            max-width: 500px;  /* 在大屏幕上限制最大宽度 */
-            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: auto;
+            margin: auto; /* 修改为auto，实现更好的上下居中 */
+            justify-content: center; /* 添加垂直居中 */
+            min-height: 100vh; /* 确保容器至少占据整个视口高度 */
         }
         
         .header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+            flex-direction: column;
+            align-items: flex-start; /* 改为左对齐 */
             width: 100%;
+            margin: 0;
+            gap: 8px;
+        }
+        
+        .score-container {
+            font-size: 16px; /* 缩小"分数"文字 */
+            font-weight: bold;
+            color: #37352f; /* 黑色 */
+        }
+        
+        .score-container span {
+            color: #5b7cff; /* 分数值保持蓝色 */
         }
         
         h1 {
-            font-size: 30px;
+            margin: 0; /* 标题margin设为0 */
+            font-size: 32px; /* 可选：调整标题大小 */
         }
         
         .score-container {
-            font-size: 12px;
-            padding: 5px 10px;
-        }
-        
-        .score-container #score {
-            font-size: 16px;
-        }
-        
-        .new-game {
-            font-size: 14px;
-            padding: 8px 12px;
-        }
-        
-        .tile {
-            font-size: 5vw;  /* 使用视口单位 */
-        }
-        
-        .score-container {
-            position: relative;
-            background: #bbada0;
-            padding: 8px 15px;  /* 减小内边距 */
-            border-radius: 6px;
-            color: white;
-            font-size: 14px;  /* 减小字体大小 */
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-            min-width: 60px;  /* 减小最小宽度 */
-        }
-        
-        .score-container #score {
-            display: block;
-            font-size: 20px;  /* 减小分数字体大小 */
-            margin-top: 3px;
-        }
-        
-        .new-game {
-            background: #8f7a66;
-            color: #f9f6f2;
-            border: none;
-            padding: 10px 15px;  /* 减小内边距 */
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;  /* 减小字体大小 */
-            font-weight: bold;
-            margin-bottom: 15px;
-            transition: background-color 0.2s ease;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-            display: block;
-            width: 110px;  /* 减小按钮宽度 */
-            text-align: center;
+            font-size: 20px; /* 放大分数文字 */
+            font-weight: bold; /* 加粗 */
+            color: #5b7cff; /* 蓝色 */
         }
         
         .grid-container {
-            background: #bbada0;
-            padding: 10px;  /* 减小内边距 */
-            border-radius: 8px;
+            background: #ffffff;
+            padding: 16px; /* 网格内边距改为16px */
+            border-radius: 12px;
             width: 100%;
-            aspect-ratio: 1/1;  /* 保持正方形 */
-            position: relative;
+            aspect-ratio: 1/1;
             box-sizing: border-box;
-            box-shadow: 0 5px 0 rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            order: 0;
+        }
+        
+        .new-game {
+            background: #5b7cff;
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            order: 1;
+            margin: 0;
         }
         
         .grid-row {
             display: flex;
-            margin-bottom: 10px;  /* 减小行间距 */
-            height: calc(25% - 7.5px);  /* 动态计算高度 */
+            margin-bottom: 16px; /* 行间距改为16px */
+            height: calc(25% - 12px); /* 调整高度计算 */
+        }
+        
+        .grid-cell {
+            width: calc(25% - 12px); /* 增大格子宽度 */
+            aspect-ratio: 1/1;
+            margin-right: 16px; /* 增大格子间距 */
+            background: rgba(240, 240, 245, 0.3);
+            border-radius: 8px;
         }
         
         .grid-row:last-child {
@@ -125,12 +107,23 @@
         }
         
         .grid-cell {
-            width: calc(25% - 7.5px);  /* 动态计算宽度 */
-            aspect-ratio: 1/1;  /* 保持正方形 */
-            margin-right: 10px;  /* 减小单元格间距 */
-            background: rgba(238, 228, 218, 0.35);
-            border-radius: 6px;
-            position: relative;
+            width: calc(25% - 11.25px);
+            aspect-ratio: 1/1;
+            margin-right: 15px;
+            background: rgba(240, 240, 245, 0.3);
+            border-radius: 8px;
+        }
+        
+        .grid-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .grid-cell {
+            width: calc(25% - 7.5px);
+            aspect-ratio: 1/1;
+            margin-right: 10px;
+            background: rgba(240, 240, 245, 0.3);
+            border-radius: 4px;
         }
         
         .grid-cell:last-child {
@@ -138,31 +131,58 @@
         }
         
         .tile {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;  /* 减小默认字体大小 */
-            font-weight: bold;
-            background: #eee4da;
-            border-radius: 6px;
-            transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform;
+            font-weight: 600;
+            background: #ffffff;
+            border-radius: 4px;
+            box-shadow: none;
+            border: none;
+        }
+        
+        .tile.tile-2,
+        .tile.tile-4,
+        .tile.tile-8,
+        .tile.tile-16,
+        .tile.tile-32,
+        .tile.tile-64 { 
+            font-size: 24px; 
+        }
+        
+        .tile.tile-128,
+        .tile.tile-256 { 
+            font-size: 22px; 
+        }
+        
+        .tile.tile-512 { 
+            font-size: 20px; 
+        }
+        
+        .tile.tile-1024 { 
+            font-size: 18px; 
+        }
+        
+        .tile.tile-2048 { 
+            font-size: 16px; 
         }
 
-        /* 调整不同数字块的字体大小 */
-        .tile.tile-128, .tile.tile-256, .tile.tile-512 {
-            font-size: 20px;
-        }
-        
-        .tile.tile-1024, .tile.tile-2048 {
-            font-size: 18px;
-        }
-        
+        /* 蓝紫色系的数字块 */
+        .tile.tile-2 { background: #f0f4ff; color: #5b7cff; }
+        .tile.tile-4 { background: #e6edff; color: #5b7cff; }
+        .tile.tile-8 { background: #d0dbff; color: #3d5af1; }
+        .tile.tile-16 { background: #b5c6ff; color: #3d5af1; }
+        .tile.tile-32 { background: #9ab1ff; color: #1a3ef0; }
+        .tile.tile-64 { background: #7f9cff; color: #1a3ef0; }
+        .tile.tile-128 { background: #5b7cff; color: white; }
+        .tile.tile-256 { background: #3d5af1; color: white; }
+        .tile.tile-512 { background: #1a3ef0; color: white; }
+        .tile.tile-1024 { background: #0d2ec9; color: white; }
+        .tile.tile-2048 { background: #061f9e; color: white; }
+
+        /* 动画效果保持不变 */
         .tile.tile-new {
             animation: appear 0.2s ease-out;
         }
@@ -171,50 +191,7 @@
             z-index: 2;
             animation: merge 0.2s ease-out;
         }
-        .tile.tile-moving {
-            z-index: 3;
-            transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-        .tile.move-left { transform: translateX(-100%); }
-        .tile.move-right { transform: translateX(100%); }
-        .tile.move-up { transform: translateY(-100%); }
-        .tile.move-down { transform: translateY(100%); }
-        .tile.tile-2 { background: #eee4da; color: #776e65; }
-        .tile.tile-4 { background: #ede0c8; color: #776e65; }
-        .tile.tile-8 { background: #f2b179; color: #f9f6f2; }
-        .tile.tile-16 { background: #f59563; color: #f9f6f2; }
-        .tile.tile-32 { background: #f67c5f; color: #f9f6f2; }
-        .tile.tile-64 { background: #f65e3b; color: #f9f6f2; }
-        .tile.tile-128 { 
-            background: #edcf72; 
-            color: #f9f6f2;
-            font-size: 30px;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1), inset 0 0 20px rgba(255,255,255,0.2);
-        }
-        .tile.tile-256 { 
-            background: #edcc61; 
-            color: #f9f6f2;
-            font-size: 30px;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1), inset 0 0 20px rgba(255,255,255,0.2);
-        }
-        .tile.tile-512 { 
-            background: #edc850; 
-            color: #f9f6f2;
-            font-size: 30px;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1), inset 0 0 20px rgba(255,255,255,0.2);
-        }
-        .tile.tile-1024 { 
-            background: #edc53f; 
-            color: #f9f6f2;
-            font-size: 25px;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1), inset 0 0 20px rgba(255,255,255,0.2);
-        }
-        .tile.tile-2048 { 
-            background: #edc22e; 
-            color: #f9f6f2;
-            font-size: 25px;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1), inset 0 0 20px rgba(255,255,255,0.3);
-        }
+        
         @keyframes appear {
             0% {
                 opacity: 0;
@@ -229,6 +206,7 @@
                 transform: scale(1);
             }
         }
+        
         @keyframes merge {
             0% {
                 transform: scale(1);
